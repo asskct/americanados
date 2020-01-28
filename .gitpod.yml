@@ -1,1 +1,4 @@
 { image: { file: .gitpod.Dockerfile } }
+vscode:
+  extensions:
+    - EQuimper.react-native-react-redux@2.0.3:vtn/lCOqanKTiqhFSSSePg==
