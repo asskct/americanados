@@ -1,8 +1,15 @@
 import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-const Home = () => {
+import AuthRoute from '../auth/authRoute'
+
+const Home = ({ routes }) => {
     return (
-        <h1>Home</h1>
+        <BrowserRouter> 
+            <Switch>
+            {routes.map((route, i) => <AuthRoute key={i} {...route} />)}
+            </Switch>
+        </BrowserRouter>
     )
 }
 
