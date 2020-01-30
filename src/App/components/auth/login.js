@@ -1,8 +1,11 @@
-import React, {} from 'react'
-import useForm from '../common/useForm'
-import validate from './validateLogin'
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Login = () => {    
+import validate from './validateLogin'
+import useForm from '../common/useForm'
+import * as AuthActions from '../../store/auth'
+
+const Login = ({ signIn }) => {    
     const submit = () => {       
         console.log(values)
     }
@@ -59,4 +62,7 @@ const Login = () => {
     )
 }
 
-export default Login
+export default connect(
+    null,
+    AuthActions
+)(Login)

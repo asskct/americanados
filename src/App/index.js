@@ -1,18 +1,24 @@
 import React from 'react'
-import {BrowserRouter, Switch, Route } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
+import { Switch, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
-import AuthRoute from './components/auth/authRoute'
-import Login from './components/auth/login'
+import store from './store'
 import Routes from './routes'
+import history from '../App/routes/history'
+import Login from './components/auth/login'
+import AuthRoute from './components/auth/authRoute'
 
 const App = () => {
     return (
-        <BrowserRouter> 
-	        <Switch>
-	          {Routes.map((route, i) => <AuthRoute key={i} {...route} />)}
-	          <Route path="/login" component={Login}/> 
-	        </Switch>
-	   	</BrowserRouter>
+        <Provider store={store}>
+            <ConnectedRouter history={history}> 
+                <Switch>
+                    {Routes.map((route, i) => <AuthRoute key={i} {...route} />)}
+                    <Route path="/login" component={Login}/> 
+                </Switch>
+            </ConnectedRouter>
+        </Provider>
     )
 }
 
