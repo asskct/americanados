@@ -1,62 +1,68 @@
 import React from 'react'
-import useForm from './useForm'
+import { connect } from 'react-redux'
 
-const Login = () => {
+import validate from './validateLogin'
+import useForm from '../common/useForm'
+import * as AuthActions from '../../store/auth'
 
-    const [values, handleChange] = useForm()
-
-    const login = e => {
-        e.preventDefault()
-        console.log(values)
-    }
-
-    return (       
+const Login = ({ signIn }) => {    
+    const [
+        values,
+        handleChange,
+        handleSubmit,
+        error] = useForm(signIn, validate)
+        
+    return (
         <div className="column is-half is-offset-one-quarter">
-          <form onSubmit={login}>
+            <form onSubmit={handleSubmit} noValidate>
             <h1 className="is-size-1 has-text-left"> Login </h1>
             <div className="field">
-              <p className="control has-icons-left has-icons-right">
+                <p className="control has-icons-left has-icons-right">
                 <input
-                  className="input"
-                  type="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-                  value={values.email || ""}
+                    className={`input ${error.email && "inputError"}`}
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    value={values.email || ""}
                 />
                 <span className="icon is-small is-left">
-                  <i className="fas fa-envelope"></i>
+                    <i className="fas fa-envelope"></i>
                 </span>
-                <span className="icon is-small is-right">
-                  <i className="fa fa-check"></i>
-                </span>
-              </p>
+                </p>
+                {error.email && <p className="error">{error.email}</p>}
             </div>
             <div className="field">
-              <p className="control has-icons-left">
+                <p className="control has-icons-left">
                 <input
-                  className="input"
-                  type="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                  value={values.password || ""}
+                    className={`input ${error.password && "inputError"}`}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={handleChange}
+                    value={values.password || ""}
                 />
                 <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
+                    <i className="fas fa-lock"></i>
                 </span>
-              </p>
+                </p>
+                {error.password && <p className="error">{error.password}</p>}
             </div>
             <div className="field">
-              <p className="control">
+                <p className="control">
                 <button
                     type="submit"
-        	        className="button is-success"
-	                onClick={() => {}}> Login 
+                    className="button is-success"
+                    onClick={() => {}}> Login 
                 </button>
-              </p>
+                </p>
             </div>
-          </form>
+            </form>
         </div>
     )
 }
 
-export default Login
+export default connect(
+    null,
+    AuthActions
+)(Login)

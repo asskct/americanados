@@ -7,14 +7,7 @@ const Routes = [
     {
       exact: true,
       path: "/",
-      component: Home,
-      routes: [
-        {
-          exact: true,
-          path: "/",
-          component: Inicio
-        }
-      ]
+      component: Home,      
     }
 ]
 
