@@ -1,17 +1,19 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 
 import validate from './validateLogin'
 import useForm from '../common/useForm'
-import * as AuthActions from '../../store/auth'
+// import * as AuthActions from '../../store/auth'
 
-const Login = ({ signIn }) => {    
+const Login = () => {
+    const signIn = useSelector(state => state.signIn)
     const [
         values,
         handleChange,
         handleSubmit,
-        error] = useForm(signIn, validate)
-        
+        error
+    ] = useForm(signIn, validate)
+      
     return (
         <div className="column is-half is-offset-one-quarter">
             <form onSubmit={handleSubmit} noValidate>
@@ -62,7 +64,9 @@ const Login = ({ signIn }) => {
     )
 }
 
-export default connect(
-    null,
-    AuthActions
-)(Login)
+export default Login
+
+// export default connect(
+//     null,
+//     AuthActions
+// )(Login)
