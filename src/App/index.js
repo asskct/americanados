@@ -1,10 +1,11 @@
 import React from 'react'
 import { ConnectedRouter } from 'connected-react-router'
 import { Switch, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { Provider } from "react-redux"
 
-import store from './store'
+
 import Routes from './routes'
+import store from './store/'
 import history from '../App/routes/history'
 import Login from './components/auth/login'
 import AuthRoute from './components/auth/authRoute'

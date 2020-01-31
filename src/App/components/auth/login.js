@@ -6,12 +6,12 @@ import useForm from '../common/useForm'
 import * as AuthActions from '../../store/auth'
 
 const Login = ({ signIn }) => {    
-    const submit = () => {       
-        console.log(values)
-    }
-
-    const [values, handleChange, handleSubmit, error] = useForm(submit, validate)
-
+    const [
+        values,
+        handleChange,
+        handleSubmit,
+        error] = useForm(signIn, validate)
+        
     return (
         <div className="column is-half is-offset-one-quarter">
             <form onSubmit={handleSubmit} noValidate>
