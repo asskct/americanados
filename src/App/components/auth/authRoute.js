@@ -1,11 +1,12 @@
 import React from 'react'
 import { Route, Redirect } from "react-router-dom"
-
-import isAuth from './auth'
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 
 const AuthRoute = ({ component: Component, exact, path, ...rest }) => {
+    const auth = useSelector(state => state.firebase.auth)
     return (
-        isAuth() ? (
+        isLoaded(auth) && !isEmpty(auth) ? (
         <Route
           exact={exact}
           path={path}

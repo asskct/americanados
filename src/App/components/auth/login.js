@@ -1,12 +1,11 @@
 import React from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 
 import validate from './validateLogin'
 import useForm from '../common/useForm'
-// import * as AuthActions from '../../store/auth'
+import * as AuthActions from '../../store/auth'
 
-const Login = () => {
-    const signIn = useSelector(state => state.signIn)
+const Login = ({ signIn }) => {
     const [
         values,
         handleChange,
@@ -64,9 +63,7 @@ const Login = () => {
     )
 }
 
-export default Login
-
-// export default connect(
-//     null,
-//     AuthActions
-// )(Login)
+export default connect(
+    null,
+    AuthActions
+)(Login)

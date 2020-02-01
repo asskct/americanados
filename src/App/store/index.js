@@ -1,27 +1,27 @@
 
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import { getFirebase, reactReduxFirebase } from 'react-redux-firebase'
+import { firebaseReducer, getFirebase } from 'react-redux-firebase'
+
 import thunk from  'redux-thunk'
 
-import * as AuthActions from './auth'
 import history from '../routes/history'
-import fbConfig from '../config/fbConfig'
 
-const middlewares = [
-    thunk,
+const initialState = {}
+
+const middlewares = [ 
     routerMiddleware(history),
-    thunk.withExtraArgument({getFirebase})
+    thunk.withExtraArgument(getFirebase)
 ]
 
 const store = createStore (
     combineReducers({
-      router: connectRouter(history),
-      ...AuthActions, 
+        router: connectRouter(history),
+        firebase: firebaseReducer,
     }),
-    compose(
-        applyMiddleware(...middlewares),
-        reactReduxFirebase(fbConfig)
+    initialState,
+    compose (
+        applyMiddleware(...middlewares)
     )
 )
 
